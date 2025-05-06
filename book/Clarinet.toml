@@ -1,0 +1,19 @@
+[project]
+name = "blockchain-budget-planner"
+description = "A decentralized budget planning application built on the Stacks blockchain"
+authors = []
+telemetry = false
+requirements = []
+
+[contracts.budget-planner]
+path = "contracts/budget-planner.clar"
+depends_on = []
+
+[repl.analysis]
+passes = ["check_checker"]
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false
