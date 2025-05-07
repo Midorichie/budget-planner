@@ -1,158 +1,117 @@
-# Blockchain Budget Planner
+# Budget Planner Smart Contract System
 
-A decentralized budget planning application built on the Stacks blockchain using Clarity smart contracts.
+A comprehensive budget planning and analytics system built for the Stacks blockchain.
 
 ## Overview
 
-This project implements a budget planning system where users can:
-- Set savings goals and budgets
-- Track expenses by category
-- Create alerts when approaching spending limits
-- Visualize spending patterns (via frontend integration)
+This project provides a full-featured budget management system that allows users to:
 
-All data is stored securely on the Stacks blockchain, providing transparency, security, and immutability for financial records.
+- Create and manage personal budgets
+- Allocate funds to specific spending categories
+- Track spending against allocations
+- Receive alerts when nearing budget thresholds
+- Analyze spending patterns over time
+- Set and track savings goals
 
-## Technical Stack
+## Key Features
 
-- **Smart Contract Language**: Clarity
-- **Blockchain**: Stacks
-- **Development Environment**: Clarinet
-- **Version Control**: Git
+### Budget Planner Contract
 
-## Project Structure
+- **User Registration**: Create unique identifiers for users
+- **Budget Creation**: Initialize and customize budgets
+- **Category Management**: Create and manage spending categories
+- **Spending Tracking**: Record and monitor expenditures
+- **Budget Alerts**: Get notifications when approaching spending limits
+- **Permission Management**: Control who can access and modify your budget
+- **Activity Logging**: Maintain a complete audit trail of all budget activities
+- **Budget Status Control**: Activate, freeze, or close budgets as needed
 
-```
-budget-planner/
-├── contracts/
-│   └── budget-planner.clar       # Main smart contract
-├── tests/
-│   └── budget-planner_test.ts    # Contract tests
-├── Clarinet.toml                 # Project configuration
-├── .gitignore
-└── README.md                     # This file
-```
+### Budget Analytics Contract
 
-## Smart Contract Details
+- **Historical Spending**: Track spending patterns over time
+- **Savings Goals**: Create and track progress toward savings targets
+- **Performance Metrics**: Calculate budget adherence and other metrics
+- **Spending Trends**: Visualize spending changes over time
+- **Cross-Contract Integration**: Seamless interaction between contracts
 
-The main contract (`budget-planner.clar`) contains the following core functionality:
+## Security Features
 
-1. **Budget Management**:
-   - Initialize user budgets
-   - Set spending categories and allocations
-   - Record expenses
-   - Check remaining budgets
+- **Permission-Based Access Control**: Fine-grained permissions for reading, writing, and administration
+- **Activity Logging**: Complete audit trail of all budget operations
+- **Status Management**: Ability to freeze budgets in case of security concerns
+- **Error Handling**: Comprehensive error codes and validation
+- **Owner Controls**: Contract ownership with transfer capabilities
 
-2. **Alert System**:
-   - Create threshold alerts for categories
-   - Activate/deactivate alerts
+## Technical Details
 
-3. **Data Structures**:
-   - User budgets map
-   - Category allocations
-   - Alert configurations
+The system consists of two primary smart contracts:
+
+1. **Budget Planner Contract**: Core budget management functionality
+2. **Budget Analytics Contract**: Extended analytics and goal tracking
+
+These contracts use traits for interoperability, allowing them to securely communicate with each other.
 
 ## Getting Started
 
 ### Prerequisites
 
-1. Install the Stacks CLI and Clarinet:
-   ```bash
-   npm install -g @stacks/cli
-   npm install -g @hirosystems/clarinet
-   ```
+- [Clarinet](https://github.com/hirosystems/clarinet) installed
+- Basic understanding of [Clarity](https://clarity-lang.org/) and the Stacks blockchain
 
-2. Install Git for version control.
+### Installation
 
-### Project Setup
+1. Clone this repository
+```bash
+git clone https://github.com/midorichie/budget-planner.git
+cd budget-planner
+```
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/midorichie/blockchain-budget-planner.git
-   cd blockchain-budget-planner
-   ```
+2. Install dependencies
+```bash
+npm install
+```
 
-2. Initialize a new Clarinet project (if starting from scratch):
-   ```bash
-   clarinet new blockchain-budget-planner
-   cd blockchain-budget-planner
-   ```
-
-3. Add the smart contract to your project:
-   ```bash
-   clarinet contract new budget-planner
-   ```
-   Then copy the contract code into `contracts/budget-planner.clar`.
-
-### Running Tests
-
-Execute the test suite:
+3. Run tests
 ```bash
 clarinet test
 ```
 
-## Contract Deployment
+## Usage
 
-To deploy to the Stacks testnet:
-
-1. Generate a new keychain:
-   ```bash
-   stx make_keychain -t
-   ```
-
-2. Request testnet STX from the faucet.
-
-3. Deploy the contract:
-   ```bash
-   clarinet deploy --testnet
-   ```
-
-## Usage Examples
-
-### Initialize a User Budget
+### Creating a New Budget
 
 ```clarity
 (contract-call? .budget-planner initialize-budget u1 u10000)
 ```
-This initializes a budget of 10,000 microSTX for user ID 1.
 
-### Add a Spending Category
+### Adding a Category
 
 ```clarity
 (contract-call? .budget-planner add-category-allocation u1 "groceries" u3000)
 ```
-This allocates 3,000 microSTX to the "groceries" category for user ID 1.
 
-### Record Spending
-
-```clarity
-(contract-call? .budget-planner record-spending u1 "groceries" u500)
-```
-This records a 500 microSTX expense in the "groceries" category.
-
-### Create a Budget Alert
+### Recording Spending
 
 ```clarity
-(contract-call? .budget-planner add-budget-alert u1 "groceries" u80)
+(contract-call? .budget-planner record-spending u1 "groceries" u50)
 ```
-This creates an alert that triggers when 80% of the groceries budget is spent.
 
-## Security Considerations
+### Setting a Savings Goal
 
-- The contract implements access controls to ensure only authorized users can modify their own budgets
-- Integer overflow protection is built into Clarity
-- The contract avoids reentrancy vulnerabilities by design
+```clarity
+(contract-call? .budget-analytics create-savings-goal u1 "Vacation" u5000 u1672531200)
+```
 
-## Future Enhancements
+## Contributing
 
-1. Integration with STX transfers for actual fund management
-2. Multi-signature budget approval for shared finances
-3. Time-locked budgets for periodic allowances
-4. Enhanced analytics for spending patterns
+Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Contact
+## Acknowledgments
 
-For questions or support, please contact [hamsohood@gmail.com].
+- Stacks Foundation
+- Clarity language documentation
+- The entire Stacks community
