@@ -1,13 +1,22 @@
 [project]
-name = "blockchain-budget-planner"
-description = "A decentralized budget planning application built on the Stacks blockchain"
-authors = []
+name = "budget-planner"
+description = "A comprehensive budget planning and analytics system for Stacks blockchain"
+authors = ["Hammed <hamsohood@gmail.com>"]
 telemetry = false
 requirements = []
+boot_contracts = ["pox", "costs-v2", "bns"]
 
 [contracts.budget-planner]
 path = "contracts/budget-planner.clar"
 depends_on = []
+
+[contracts.budget-analytics]
+path = "contracts/budget-analytics.clar"
+depends_on = ["budget-planner"]
+
+[repl]
+costs_version = 2
+parser_version = 2
 
 [repl.analysis]
 passes = ["check_checker"]
